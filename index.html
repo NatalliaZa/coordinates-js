@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball and coordinates</title>
+    <style>
+        .box{
+            width: 830px;
+            height: 430px;
+            border: 5px solid #f00;
+            border-radius: 1%;
+            position: relative;
+            left: 20%;
+        }
+        .item{
+            width: 30px;
+            height: 30px;
+            background-color: #f00;
+            border-radius: 100%;
+            position: absolute;
+        }
+        .coord{
+            width: 430px;
+            height: 130px;
+            background-color:#f00;
+            color: white;
+            text-align: center;
+            border-radius: 1%;
+            position: relative;
+            top: 20px;
+            left: 36%;
+        }
+           p {
+            height: 10px;
+           }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class ="item"></div>
+    </div>
+    <div class="coord">
+        <br>
+        <p>Current coordinates:</p>
+        <p class="coordX"></p>
+        <p class="coordY"></p>
+    </div>
+
+<script>
+    let randLeft = Math.trunc(Math.random()*800) + 1;
+    console.log(randLeft);
+    
+    let randTop = Math.trunc(Math.random()*400) + 1;
+    console.log(randTop);
+    
+    let el = document.querySelector('.item');
+    el.style.top = randTop + 'px';
+    el.style.left = randLeft + 'px';
+
+    let arr = ['left', 'right', 'top', 'bottom'];
+    let rand = Math.trunc(Math.random()*arr.length);
+    console.log(arr[rand]);
+
+    let leftX = getComputedStyle(el).left;
+    let elX = document.querySelector('.coordX');
+
+    let toptY = getComputedStyle(el).top;
+    let elY = document.querySelector('.coordY');
+
+    setInterval(function(){
+        arr = ['left', 'right', 'top', 'bottom'];
+        rand = Math.trunc(Math.random()*arr.length);
+    }, 2000);
+
+    setInterval(function(){
+
+    if (arr[rand] == 'left'){
+    let left = parseInt(getComputedStyle(el).left);
+    console.log(left);
+    el.style.left = left + 1 + 'px';
+        if (left == 800) {
+        arr[rand] = 'right';
+        console.log(arr[rand]);       
+    };
+   };
+   
+
+    if (arr[rand] == 'right'){
+    let left = parseInt(getComputedStyle(el).left);
+    console.log(left);
+    el.style.left = (left - 1) + 'px';
+        if (left == 0) {
+        arr[rand] = 'left';
+        console.log(arr[rand]);
+    };
+};
+
+    if (arr[rand] == 'top'){
+    let top = parseInt(getComputedStyle(el).top);
+    console.log(top);
+    el.style.top = top + 1 + 'px';
+        if (top == 400) {
+        arr[rand] = 'bottom';
+        console.log(arr[rand]);       
+    };
+   };
+   
+    if (arr[rand] == 'bottom'){
+    let top = parseInt(getComputedStyle(el).top);
+    console.log(top);
+    el.style.top = (top - 1) + 'px';
+        if (top == 0) {
+        arr[rand] = 'top';
+        console.log(arr[rand]);
+    };
+};
+leftX = getComputedStyle(el).left;
+    elX.innerHTML = 'Current X: ' + leftX;
+    topY = getComputedStyle(el).top;
+    elY.innerHTML = 'Current Y: ' + topY;
+
+
+},5);
+
+    
+    
+
+
+</script>
+
+
+</body>
+</html>
